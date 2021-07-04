@@ -5,8 +5,9 @@ const Tag = require('./Tag');
 
 // Categories have many Products
 // Products belongsTo Category
-Product.belongsTo(Category);
-Category.hasMany(Product,{constraints:false});
+Category.hasMany(Product);
+Product.belongsTo(Category,{constraints:false});
+
 
 // Products belongToMany Tags (through ProductTag)
 // Tags belongToMany Products (through ProductTag)
