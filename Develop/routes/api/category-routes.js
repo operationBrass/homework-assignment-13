@@ -5,7 +5,6 @@ const { Category, Product } = require('../../models');
 
 router.get('/', (req, res) => 
 {
-
  Category.findAll()
  .then((result) =>{
    res.send(result);
@@ -24,8 +23,10 @@ Category.findOne(
 {
   where:
   {
-    id:req.params.id
-  }
+    id:req.params.id,
+    
+  },
+  include: [ Product ]
 })
 .then((result) => {
   if(result !== null)
@@ -66,7 +67,22 @@ router.post('/', (req, res) =>
 router.put('/:id', (req, res) => {
   // update a category by its `id` value
   Category.findOne({where:{id:req.params.id}})
-  .then((result) => {console.log(result)});
+  .then((result) => 
+  {
+    if(result !== null)
+    {
+    result.update(
+      {
+        category_name: req.body.category_name,
+      })
+    .then(update => {res.send(JSON.stringify(update))});
+    }
+    else
+    {
+      res.status(404);
+      res.end("Record not found..");
+    }
+  });
 });
 
 router.delete('/:id', (req, res) => {
@@ -81,7 +97,7 @@ router.delete('/:id', (req, res) => {
   {
     if (result) 
     {
-      res.send("Successfully Deleted")
+      res.send("Successfully deleted..")
     }
     else
     {
