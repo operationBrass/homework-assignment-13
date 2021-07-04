@@ -7,12 +7,43 @@ const { Product, Category, Tag, ProductTag } = require('../../models');
 router.get('/', (req, res) => {
   // find all products
   // be sure to include its associated Category and Tag data
+  Product.findAll()
+  .then((result) =>{
+    res.send(result);
+   })
+   .catch((err)=>{
+     console.log("There was an error ", err)
+   });
 });
 
 // get one product
 router.get('/:id', (req, res) => {
   // find a single product by its `id`
   // be sure to include its associated Category and Tag data
+
+  Product.findOne(
+    {
+      where:
+      {
+        id:req.params.id
+      }
+    })
+    .then((result) => {
+      if(result !== null)
+      {
+      res.send(result);
+      }
+      else
+      {
+      res.status(404)
+      res.end("Product not found..")
+      }
+    })
+    .catch((err) => {
+        res.status("500",err)
+        res.send(err)
+      });
+
 });
 
 // create new product
@@ -25,6 +56,7 @@ router.post('/', (req, res) => {
       tagIds: [1, 2, 3, 4]
     }
   */
+ 
   Product.create(req.body)
     .then((product) => {
       // if there's product tags, we need to create pairings to bulk create in the ProductTag model
@@ -91,6 +123,24 @@ router.put('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   // delete one product by its `id` value
+  Category.destroy(
+    {
+      where:
+      {id: req.params.id
+      }
+    })
+    .then((result) => 
+    {
+      if (result) 
+      {
+        res.send("Successfully Deleted")
+      }
+      else
+      {
+        res.status(404);
+        res.end("Record not found..");
+      }
+    });
 });
 
 module.exports = router;
