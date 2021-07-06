@@ -5,13 +5,15 @@
 
 
 
-  ![e-commerce backend](./Develop/assets/finalScreen.png)
+  ![e-commerce backend](./Develop/assets/finalScreen.PNG)
 
 
           
 ### Description 
 
-mySQL database of products with tags and categories 
+The E-Commerce Backend is a mysql database and application backend for an e-commerce site. This application has been built using MySQL2, Express, Sequelize and dotenv. Insomnia Core is utilized to demonstrate the functionalities of this application.
+
+Ecommerce runs on a mySQL database that is made accessible via a command line CMS. The application allows you to many products and linking them to categories and tags 
 
 
 ### Table of Contents
@@ -26,7 +28,9 @@ mySQL database of products with tags and categories
 
 ## Usage Guide 
 
+Insomina is used to test the functionality.
 
+Watch [this](https://drive.google.com/file/d/1xRfVmBduITnUHBzV3eBGXjTN8yS7J8DD/view) video to learn more 
 
 
 ## Installation 
